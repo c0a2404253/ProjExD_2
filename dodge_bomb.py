@@ -13,6 +13,11 @@ DELTA = {
     pg.K_LEFT:(-5,0),
     pg.K_RIGHT:(+5,0),
 }
+zoom = {
+    (-5,0):0,
+    (-5,-5):+90,
+    (-5,+5):-90,
+}
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 def gameover(screen: pg.Surface) -> None:
@@ -20,10 +25,12 @@ def gameover(screen: pg.Surface) -> None:
     pg.draw.rect(blackout,(0,0,0),pg.Rect(0,0,1100,650))
     blackout.set_alpha(200)
     screen.blit((blackout),(0,0))
+    #ゲームオーバー文字
     fonto = pg.font.Font(None, 80)
     txt = fonto.render("GAMEOVER",
         True, (255, 255, 255))
     screen.blit(txt, [400, 280])
+    #泣きこうかとん
     ko_img = pg.image.load("fig/8.png")    
     screen.blit(ko_img, [330,280])
     screen.blit(ko_img, [770,280])
@@ -31,6 +38,12 @@ def gameover(screen: pg.Surface) -> None:
     pg.display.update()
     time.sleep(5)
     return 
+
+def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
+    bb_imgs, bb_accs = init_bb_imgs()
+    avx = vx*bb_accs[min(tmr//500, 9)]
+    bb_img = bb_imgs[min(tmr//500, 9)]
+    return
 
 def check_bound(obj_rct: pg.Rect) -> tuple[bool, bool]:
     """
@@ -74,12 +87,9 @@ def main():
                 return
         screen.blit(bg_img, [0, 0]) 
 
-          # こうかとんRectと爆弾Rectが重なっていたら
+        # こうかとんRectと爆弾Rectが重なっていたら
         if kk_rct.colliderect(bb_rct):
             gameover(screen)
-            # pg.draw.rect(screen,(0,0,0),(0,0,1100,650))
-            # time.sleep(5)
-            # print("Game Over")
             return
         
         key_lst = pg.key.get_pressed()
@@ -89,6 +99,11 @@ def main():
             if key_lst[key]:
                 sum_mv[0] +=mv[0]
                 sum_mv[1] +=mv[1]
+
+                # for key,mv2 in zoom.items():
+                #     kk_img = pg.image.load("fig/3.png")
+                #     kk_img = pg.transform.flip(kk_img, True, False)
+                #     kk_img = pg.transform.rotozoom(kk_img, 90, 1.0)
                 
         # if key_lst[pg.K_UP]:
         #     sum_mv[1] -= 5
