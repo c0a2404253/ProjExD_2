@@ -99,6 +99,10 @@ def main():
             if key_lst[key]:
                 sum_mv[0] +=mv[0]
                 sum_mv[1] +=mv[1]
+            if sum_mv[0]==-5 & sum_mv[1]==+5:
+                bg_img = pg.image.load("fig/pg_bg.jpg")    
+                kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 90, 0.9)
+                kk_rct = kk_img.get_rect()
 
                 # for key,mv2 in zoom.items():
                 #     kk_img = pg.image.load("fig/3.png")
