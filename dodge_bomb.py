@@ -39,7 +39,7 @@ def gameover(screen: pg.Surface) -> None:
     time.sleep(5)
     return 
 
-def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
+def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:#演習２爆弾基本プログラムのみ
     bb_imgs, bb_accs = init_bb_imgs()
     avx = vx*bb_accs[min(tmr//500, 9)]
     bb_img = bb_imgs[min(tmr//500, 9)]
@@ -95,7 +95,7 @@ def main():
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
 
-        for key,mv in DELTA.items():
+        for key,mv in DELTA.items():#演習３こうかとん向き途中
             if key_lst[key]:
                 sum_mv[0] +=mv[0]
                 sum_mv[1] +=mv[1]
