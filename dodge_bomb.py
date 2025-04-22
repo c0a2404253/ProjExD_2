@@ -25,9 +25,8 @@ def gameover(screen: pg.Surface) -> None:
         True, (255, 255, 255))
     screen.blit(txt, [400, 280])
     ko_img = pg.image.load("fig/8.png")    
-    kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
     screen.blit(ko_img, [330,280])
-    screen.blit(kk_img, [770,280])
+    screen.blit(ko_img, [770,280])
     
     pg.display.update()
     time.sleep(5)
